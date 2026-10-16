@@ -1,0 +1,25 @@
+{
+    "_comment": "Copy this file to cobble.json and fill in real values. cobble.json is gitignored.",
+
+    "server": {
+        "host": "api.YOUR-DOMAIN",
+        "host_secondary": "api2.YOUR-DOMAIN",
+        "port": 443,
+        "https": true
+    },
+
+    "version": "1.0.0",
+
+    "_payload_key_help": "AES-256 key (64 hex chars) used to encrypt Cobble.dll payload. MUST match $PAYLOAD_KEY env on the cobble-server. Generate with: openssl rand -hex 32",
+    "payload_key": "0000000000000000000000000000000000000000000000000000000000000000",
+
+    "_public_key_help": "Ed25519 public key (32 bytes hex). Derived from cobble-server's /opt/cobble-server/secrets/private.key. Run tools/generate_keys.ps1 against the seed to produce it.",
+    "public_key_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+
+    "deploy": {
+        "vps_host": "100.27.226.125",
+        "vps_user": "root",
+        "ssh_key": "~/.ssh/id_ed25519",
+        "releases_path": "/opt/cobble-server/releases/latest"
+    }
+}

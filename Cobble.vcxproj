@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}</ProjectGuid>
+    <RootNamespace>Cobble</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Cobble</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <CobbleBuildMode Condition="'$(CobbleBuildMode)'==''">Dev</CobbleBuildMode>
+    <OutDir>$(SolutionDir)out\bin\$(CobbleBuildMode)\</OutDir>
+    <IntDir>$(SolutionDir)out\obj\$(CobbleBuildMode)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <SDLCheck>false</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;IMGUI_DEFINE_MATH_OPERATORS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ForcedIncludeFiles>$(ProjectDir)generated\build_flags.h</ForcedIncludeFiles>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)infra\ext\jni;$(ProjectDir)infra\ext\imgui;$(ProjectDir)src;$(ProjectDir)reprotect\sdk;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Disabled</Optimization>
+      <AdditionalOptions>/FS /Zc:threadSafeInit- %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <OptimizeReferences>false</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)Cobble.map</MapFileName>
+      <MapExports>true</MapExports>
+      <AdditionalDependencies>$(ProjectDir)infra\ext\jni\jvm.lib;opengl32.lib;winhttp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)reprotect\bin\64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+   <ItemDefinitionGroup Condition="'$(CobbleBuildMode)'=='Pack'">
+     <Link>
+        
+
+        <LinkIncremental>false</LinkIncremental>
+        <AdditionalOptions>/INCREMENTAL:NO %(AdditionalOptions)</AdditionalOptions>
+        <AdditionalDependencies>VMProtectSDK64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+     </Link>
+   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\cobble.cpp" />
+    <ClCompile Include="src\jni\java.cpp" />
+    <ClCompile Include="src\jni\apollo\apollo_packet_observer.cpp" />
+    <ClCompile Include="src\jni\apollo\apollo_handshake.cpp" />
+    <ClCompile Include="src\jni\noitemrelease\noitemrelease_gate.cpp" />
+    <ClCompile Include="src\jni\packet\bytecode_patcher.cpp" />
+    <ClCompile Include="src\jni\packet\packet_interceptor.cpp" />
+    <ClCompile Include="src\jni\packet\outgoing_gate.cpp" />
+    <ClCompile Include="src\jni\slowdown\slowdown_gate.cpp" />
+    <ClCompile Include="src\jni\blink\blink_gate.cpp" />
+    <ClCompile Include="src\jni\backtrack\backtrack_gate.cpp" />
+    <ClCompile Include="src\jni\altmanager\altmanager_gate.cpp" />
+    <ClCompile Include="src\jni\render\backtrack_ghost_gate.cpp" />
+    <ClCompile Include="src\module\movement\blink.cpp" />
+    <ClCompile Include="src\module\movement\fakelag.cpp" />
+    <ClCompile Include="src\sdk\core\minecraft.cpp" />
+    <ClCompile Include="src\sdk\player\player.cpp" />
+    <ClCompile Include="src\sdk\player\effect_tracker.cpp" />
+    <ClCompile Include="src\sdk\network\network_probe.cpp" />
+    <ClCompile Include="src\sdk\network\lunar_sender.cpp" />
+    <ClCompile Include="src\sdk\network\lunar_packet_listener.cpp" />
+    <ClCompile Include="src\sdk\jni\jni_cache.cpp" />
+    <ClCompile Include="src\sdk\mc\input.cpp" />
+    <ClCompile Include="src\sdk\mc\world.cpp" />
+    <ClCompile Include="src\sdk\mc\render.cpp" />
+    <ClCompile Include="src\sdk\mc\inventory.cpp" />
+    <ClCompile Include="src\sdk\mc\player_list.cpp" />
+    <ClCompile Include="src\module\module_manager.cpp" />
+    <ClCompile Include="src\module\combat\autoclicker.cpp" />
+    <ClCompile Include="src\module\combat\autorod.cpp" />
+    <ClCompile Include="src\module\combat\blockhit.cpp" />
+    <ClCompile Include="src\module\combat\aimassist.cpp" />
+    <ClCompile Include="src\module\combat\aimbow.cpp" />
+    <ClCompile Include="src\module\combat\antibot.cpp" />
+    <ClCompile Include="src\module\utility\armorswitch.cpp" />
+    <ClCompile Include="src\module\utility\autorefill.cpp" />
+    <ClCompile Include="src\module\combat\velocity.cpp" />
+    <ClCompile Include="src\module\combat\reach.cpp" />
+    <ClCompile Include="src\module\combat\piercing.cpp" />
+
+    <ClCompile Include="src\module\combat\backtrack.cpp" />
+    <ClCompile Include="src\module\combat\hitselect.cpp" />
+    <ClCompile Include="src\module\combat\nohitdelay.cpp" />
+    <ClCompile Include="src\module\combat\criticals.cpp" />
+    <ClCompile Include="src\module\combat\opportunity.cpp" />
+    <ClCompile Include="src\module\combat\wtap.cpp" />
+    <ClCompile Include="src\hooks\winsock_hooks.cpp" />
+    <ClCompile Include="src\module\movement\nojumpdelay.cpp" />
+    <ClCompile Include="src\module\utility\noitemrelease.cpp" />
+    <ClCompile Include="src\module\utility\bridgeassist.cpp" />
+    <ClCompile Include="src\module\utility\clutch.cpp" />
+    <ClCompile Include="src\module\utility\breaker.cpp" />
+
+    <ClCompile Include="src\module\utility\fastplace.cpp" />
+    <ClCompile Include="src\module\utility\fastbreak.cpp" />
+    <ClCompile Include="src\module\movement\timer.cpp" />
+    <ClCompile Include="src\module\movement\timerrange.cpp" />
+    <ClCompile Include="src\module\movement\sprint.cpp" />
+    <ClCompile Include="src\module\movement\inventorymove.cpp" />
+    <ClCompile Include="src\module\utility\autotool.cpp" />
+    <ClCompile Include="src\module\utility\inventorymanager.cpp" />
+    <ClCompile Include="src\module\utility\throwpots.cpp" />
+    <ClCompile Include="src\module\utility\autopot.cpp" />
+    <ClCompile Include="src\module\utility\teams.cpp" />
+    <ClCompile Include="src\module\movement\faststop.cpp" />
+    <ClCompile Include="src\module\utility\altmanager.cpp" />
+    <ClCompile Include="src\module\utility\altmanager_auth.cpp" />
+    <ClCompile Include="src\module\visual\nametags.cpp" />
+    <ClCompile Include="src\module\visual\anti_debuff.cpp" />
+    <ClCompile Include="src\module\movement\no_slow_down.cpp" />
+    <ClCompile Include="src\module\visual\esp.cpp" />
+    <ClCompile Include="src\module\visual\animations.cpp" />
+    <ClCompile Include="src\module\visual\chams.cpp" />
+    <ClCompile Include="src\module\visual\item_esp.cpp" />
+    <ClCompile Include="src\module\visual\tracers.cpp" />
+    <ClCompile Include="src\module\visual\blockesp.cpp" />
+    <ClCompile Include="src\module\visual\trajectories.cpp" />
+    <ClCompile Include="src\module\visual\dropped_info.cpp" />
+    <ClCompile Include="src\module\visual\pings.cpp" />
+    
+    <ClCompile Include="src\ui\core\overlay.cpp" />
+    <ClCompile Include="src\ui\menu\menu.cpp" />
+    <ClCompile Include="src\ui\hud\notifications.cpp" />
+    <ClCompile Include="src\ui\hud\arraylist.cpp" />
+    <ClCompile Include="src\ui\hud\watermark.cpp" />
+    <ClCompile Include="src\module\visual\target_hud.cpp" />
+    <ClCompile Include="src\ui\widgets\widgets.cpp" />
+    <ClCompile Include="src\ui\widgets\theme.cpp" />
+    
+    <ClCompile Include="src\config\config.cpp" />
+    <ClCompile Include="src\spectate\spectate.cpp" />
+    
+    <ClCompile Include="src\util\math\math.cpp" />
+    <ClCompile Include="src\util\math\worldToScreen.cpp" />
+    <ClCompile Include="src\util\team\friends_manager.cpp" />
+    <ClCompile Include="src\util\inventory\inventory_hooks.cpp" />
+    <ClCompile Include="src\util\textures\item_textures.cpp" />
+    
+    <ClCompile Include="infra\ext\imgui\imgui.cpp" />
+    <ClCompile Include="infra\ext\imgui\imgui_draw.cpp" />
+    <ClCompile Include="infra\ext\imgui\imgui_tables.cpp" />
+    <ClCompile Include="infra\ext\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="infra\ext\imgui\imgui_impl_opengl2.cpp" />
+    <ClCompile Include="infra\ext\imgui\imgui_impl_win32.cpp" />
+    <ClCompile Include="infra\ext\minhook\buffer.c" />
+    <ClCompile Include="infra\ext\minhook\hook.c" />
+    <ClCompile Include="infra\ext\minhook\trampoline.c" />
+    <ClCompile Include="infra\ext\minhook\hde\hde64.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\cobble.hpp" />
+    <ClInclude Include="src\jni\apollo\apollo_packet_observer.hpp" />
+    <ClInclude Include="src\jni\apollo\apollo_handshake.hpp" />
+    <ClInclude Include="src\jni\packet\bytecode_patcher.hpp" />
+    <ClInclude Include="src\jni\packet\packet_hook_enc.hpp" />
+    <ClInclude Include="src\jni\java.h" />
+    <ClInclude Include="src\jni\noitemrelease\noitemrelease_gate.hpp" />
+    <ClInclude Include="src\jni\packet\packet_interceptor.hpp" />
+    <ClInclude Include="src\jni\slowdown\slowdown_gate.hpp" />
+    <ClInclude Include="src\jni\backtrack\backtrack_gate.hpp" />
+    <ClInclude Include="src\jni\altmanager\altmanager_gate.hpp" />
+    <ClInclude Include="src\util\aes_string.hpp" />
+    <ClInclude Include="src\util\logger.hpp" />
+    <ClInclude Include="src\sdk\version.h" />
+    <ClInclude Include="src\sdk\jni\jstring_util.h" />
+    <ClInclude Include="src\sdk\jni\member_resolver.h" />
+    <ClInclude Include="src\sdk\core\minecraft.h" />
+    <ClInclude Include="src\sdk\player\player.h" />
+    <ClInclude Include="src\sdk\player\effect_tracker.h" />
+    <ClInclude Include="src\sdk\player\render_data.h" />
+    <ClInclude Include="src\sdk\network\network_probe.hpp" />
+    <ClInclude Include="src\sdk\network\lunar_packet_listener.hpp" />
+    <ClInclude Include="src\sdk\jni\jni_cache.h" />
+    <ClInclude Include="src\module\module.h" />
+    <ClInclude Include="src\module\module_manager.h" />
+    <ClInclude Include="src\module\combat\autoclicker.h" />
+    <ClInclude Include="src\module\combat\autorod.h" />
+    <ClInclude Include="src\module\combat\blockhit.h" />
+    <ClInclude Include="src\module\combat\aimassist.h" />
+    <ClInclude Include="src\module\combat\aimbow.h" />
+    <ClInclude Include="src\module\combat\antibot.h" />
+    <ClInclude Include="src\module\utility\armorswitch.h" />
+    <ClInclude Include="src\module\utility\autorefill.h" />
+    <ClInclude Include="src\module\combat\velocity.h" />
+    <ClInclude Include="src\module\combat\reach.h" />
+    <ClInclude Include="src\module\combat\piercing.h" />
+
+    <ClInclude Include="src\module\combat\backtrack.h" />
+    <ClInclude Include="src\module\combat\hitselect.h" />
+    <ClInclude Include="src\module\combat\nohitdelay.h" />
+    <ClInclude Include="src\module\combat\criticals.h" />
+    <ClInclude Include="src\module\combat\opportunity.h" />
+    <ClInclude Include="src\module\combat\wtap.h" />
+    <ClInclude Include="src\hooks\winsock_hooks.h" />
+    <ClInclude Include="src\module\movement\nojumpdelay.h" />
+    <ClInclude Include="src\module\utility\bridgeassist.h" />
+    <ClInclude Include="src\module\utility\clutch.h" />
+    <ClInclude Include="src\module\utility\breaker.h" />
+
+    <ClInclude Include="src\module\utility\fastplace.h" />
+    <ClInclude Include="src\module\utility\fastbreak.h" />
+    <ClInclude Include="src\module\movement\timer.h" />
+    <ClInclude Include="src\module\movement\timerrange.h" />
+    <ClInclude Include="src\module\movement\sprint.h" />
+    <ClInclude Include="src\module\movement\inventorymove.h" />
+    <ClInclude Include="src\module\utility\autotool.h" />
+    <ClInclude Include="src\module\utility\inventorymanager.h" />
+    <ClInclude Include="src\module\movement\faststop.h" />
+    <ClInclude Include="src\module\utility\altmanager.h" />
+    <ClInclude Include="src\module\utility\altmanager_auth.h" />
+    <ClInclude Include="src\util\network\auth_http.hpp" />
+    <ClInclude Include="src\module\visual\nametags.h" />
+    <ClInclude Include="src\module\visual\anti_debuff.h" />
+    <ClInclude Include="src\module\movement\no_slow_down.h" />
+    <ClInclude Include="src\module\visual\esp.h" />
+    <ClInclude Include="src\module\visual\animations.h" />
+    <ClInclude Include="src\module\visual\chams.h" />
+    <ClInclude Include="src\module\visual\item_esp.h" />
+    <ClInclude Include="src\module\visual\tracers.h" />
+    <ClInclude Include="src\module\visual\blockesp.h" />
+    <ClInclude Include="src\module\visual\trajectories.h" />
+    <ClInclude Include="src\module\visual\dropped_info.h" />
+    <ClInclude Include="src\module\visual\pings.h" />
+    
+    <ClInclude Include="src\ui\core\overlay.h" />
+    <ClInclude Include="src\ui\core\hud_fonts.h" />
+    <ClInclude Include="src\ui\menu\menu.h" />
+    <ClInclude Include="src\ui\hud\arraylist.h" />
+    <ClInclude Include="src\ui\hud\hud_color.hpp" />
+    <ClInclude Include="src\ui\hud\hud_place.hpp" />
+    <ClInclude Include="src\ui\hud\watermark.h" />
+    <ClInclude Include="src\ui\hud\notifications.h" />
+    <ClInclude Include="src\ui\widgets\widgets.hpp" />
+    <ClInclude Include="src\ui\widgets\theme.hpp" />
+    <ClInclude Include="src\ui\widgets\icons.hpp" />
+    
+    <ClInclude Include="src\config\config.hpp" />
+    <ClInclude Include="src\util\network\json.hpp" />
+    <ClInclude Include="src\util\network\http.hpp" />
+    <ClInclude Include="src\util\hwid.hpp" />
+    <ClInclude Include="src\util\team\friends_manager.h" />
+    <ClInclude Include="src\security\session_validator.hpp" />
+    <ClInclude Include="src\security\loader_verify.hpp" />
+    <ClInclude Include="src\security\dll_integrity.hpp" />
+    <ClInclude Include="src\security\tweetnacl.h" />
+    <ClInclude Include="src\security\audit_reporter.hpp" />
+    <ClInclude Include="src\security\honeypot.hpp" />
+    <ClInclude Include="src\security\loader_validator.hpp" />
+    <ClInclude Include="src\security\system_info.hpp" />
+    <ClInclude Include="src\security\telemetry_host.hpp" />
+    <ClInclude Include="src\security\telemetry_sender.hpp" />
+    <ClInclude Include="src\security\log_uploader.hpp" />
+    <ClInclude Include="src\security\log_pubkey.hpp" />
+    <ClInclude Include="src\security\vmprotect.h" />
+    <ClInclude Include="src\sdk\player\visual_cache.h" />
+    <ClInclude Include="src\util\diagnostics.hpp" />
+    <ClInclude Include="src\util\inject_trace.hpp" />
+    <ClInclude Include="src\util\state.hpp" />
+    <ClInclude Include="src\util\state_check.hpp" />
+    <ClInclude Include="src\util\textures\embedded_textures.hpp" />
+    <ClInclude Include="src\util\textures\item_textures.h" />
+    <ClInclude Include="src\util\inventory\inventory_hooks.h" />
+    <ClInclude Include="src\util\math\geometry.h" />
+    <ClInclude Include="src\util\math\math.h" />
+    <ClInclude Include="src\util\math\worldToScreen.h" />
+    <ClInclude Include="src\jni\blink\blink_gate.hpp" />
+    <ClInclude Include="src\module\movement\fakelag.h" />
+    <ClInclude Include="src\module\utility\noitemrelease.h" />
+    <ClInclude Include="src\module\utility\throwpots.h" />
+    <ClInclude Include="src\module\utility\autopot.h" />
+    <ClInclude Include="src\module\utility\teams.h" />
+    <ClInclude Include="src\jni\packet\outgoing_gate.hpp" />
+    
+    <ClInclude Include="infra\ext\jni\jni.h" />
+    <ClInclude Include="infra\ext\jni\jni_md.h" />
+    <ClInclude Include="infra\ext\jni\jvmti.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

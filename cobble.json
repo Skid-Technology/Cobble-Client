@@ -1,0 +1,18 @@
+{
+    "server": {
+        "host": "api.cobble.vip",
+        "port": 443,
+        "https": true
+    },
+    "version": "1.7.0",
+    "payload_key": "05dae29c8e7f5d1306098e823220b992eb63881b3005351a0b5e7784ea19d907",
+    "public_key_hex": "2841ebcddb1da07a8ccd4b96576429d158a8e8fd0e1e81438456254dd9ed297d",
+    "themida_path": "D:\\wedontusethemidaanymore", 
+
+    "deploy": {
+        "vps_host": "100.27.226.125",
+        "vps_user": "root",
+        "ssh_key": "~/.ssh/id_ed25519",
+        "releases_path": "/opt/cobble-server/releases/latest"
+    }
+}

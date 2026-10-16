@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{B1B2C3D4-E5F6-7890-ABCD-EF9876543210}</ProjectGuid>
+    <RootNamespace>CobbleLoader</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <TargetName>CobbleLoader</TargetName>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <CobbleBuildMode Condition="'$(CobbleBuildMode)'==''">Dev</CobbleBuildMode>
+    <OutDir>$(ProjectDir)..\out\bin\$(CobbleBuildMode)\</OutDir>
+    <IntDir>$(ProjectDir)..\out\obj\$(ProjectName)\$(CobbleBuildMode)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>false</SDLCheck>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <ControlFlowGuard>false</ControlFlowGuard>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ForcedIncludeFiles>$(ProjectDir)..\generated\build_flags.h</ForcedIncludeFiles>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)..;$(ProjectDir)src;$(ProjectDir)src\test1;$(ProjectDir)src\test3;$(ProjectDir)src\test2;$(ProjectDir)src\test4;$(ProjectDir)res;$(ProjectDir)..\infra\ext\imgui;$(ProjectDir)..\reprotect\sdk;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      
+      <AdditionalOptions>/PDBALTPATH:none %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>d3d11.lib;dxgi.lib;gdi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\reprotect\bin\64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  
+
+
+
+
+  <PropertyGroup Condition="'$(CobbleBuildMode)'=='Pack'">
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  
+  <ItemDefinitionGroup Condition="'$(CobbleBuildMode)'=='Pack'">
+    <ClCompile>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalOptions>/GL- %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <LinkIncremental>false</LinkIncremental>
+      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
+      <AdditionalOptions>/INCREMENTAL:NO %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>VMProtectSDK64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  
+  <ItemGroup>
+    <ClCompile Include="test1.cpp" />
+    <ClCompile Include="src\test1\test2.cpp" />
+    <ClCompile Include="src\test1\test5.cpp" />
+    
+
+
+
+
+
+
+
+    <ClCompile Include="src\test1\test7.cpp">
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+    </ClCompile>
+    <ClCompile Include="src\test3\test19.cpp" />
+    <ClCompile Include="src\test2\test12.cpp" />
+    <ClCompile Include="src\test2\test10.cpp" />
+    <ClCompile Include="src\test4\test25.cpp" />
+    
+    <ClCompile Include="..\infra\ext\imgui\imgui.cpp" />
+    <ClCompile Include="..\infra\ext\imgui\imgui_draw.cpp" />
+    <ClCompile Include="..\infra\ext\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="..\infra\ext\imgui\imgui_tables.cpp" />
+    <ClCompile Include="..\infra\ext\imgui\imgui_impl_win32.cpp" />
+    <ClCompile Include="..\infra\ext\imgui\imgui_impl_dx11.cpp" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ClInclude Include="src\test1\test3.h" />
+    <ClInclude Include="src\test1\test6.h" />
+    <ClInclude Include="src\test1\test9.hpp" />
+    <ClInclude Include="src\test1\test8.hpp" />
+    <ClInclude Include="src\test3\test20.h" />
+    <ClInclude Include="src\test3\test22.h" />
+    <ClInclude Include="src\test2\test13.h" />
+    <ClInclude Include="src\test2\test11.h" />
+    <ClInclude Include="res\test43.h" />
+    
+    <ClInclude Include="src\test6\test36.hpp" />
+    <ClInclude Include="src\test6\test31.hpp" />
+    <ClInclude Include="src\test3\test16.hpp" />
+    <ClInclude Include="src\test3\test21.h" />
+    <ClInclude Include="src\test3\test17.hpp" />
+    <ClInclude Include="src\test3\test18.hpp" />
+    <ClInclude Include="src\test3\test15.hpp" />
+    <ClInclude Include="src\test4\test26.hpp" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ResourceCompile Include="res\test39.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

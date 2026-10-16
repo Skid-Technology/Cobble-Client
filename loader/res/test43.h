@@ -1,0 +1,1 @@
+#define IDR_COBBLE_DLL 101

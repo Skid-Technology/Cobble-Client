@@ -1,0 +1,3 @@
+[submodule "reprotect"]
+	path = reprotect
+	url = https://github.com/CobbleLabs/REProtect.git

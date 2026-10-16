@@ -1,0 +1,3 @@
+#include "test43.h"
+
+IDR_COBBLE_DLL RCDATA "test38.enc"
