@@ -5,7 +5,7 @@
   <br>
   <font size="3">by Skid Solutions</font>
   <br>
-  <font size ="3">A quien le dices "peruano mogolico" puto"</font>
+  <font size ="3">A quien le dices "peruano mogolico" puto</font>
 </p>
 
 ---
